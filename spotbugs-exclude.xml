@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FindBugsFilter
+        xmlns="https://github.com/spotbugs/filter/3.0.0"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="https://github.com/spotbugs/filter/3.0.0 https://raw.githubusercontent.com/spotbugs/spotbugs/3.1.0/spotbugs/etc/findbugsfilter.xsd">
+    <!-- Ideally we would suppress all warnings for the generated-sources with this: -->
+    <!-- <Match><Source name="~.*generated-sources.*"/></Match> -->
+    <!-- However, an open spotbugs issue prevents us from doing that. See here for more info: -->
+    <!-- https://github.com/spotbugs/spotbugs/issues/694 -->
+    <!-- Until that is fixed and released we are suppressing the specific errors that we find. -->
+    <!-- UPDATE: This is fixed in SpotBugs 4.0.0 beta3 released 6/23/19. We should update once it is out of beta. -->
+    <Match>
+        <Package name="~com\.teletracking\.models.*" />
+        <Bug pattern="ES_COMPARING_STRINGS_WITH_EQ" />
+        <Method name="equals" />
+    </Match>
+    <Match>
+        <Package name="~com\.teletracking\.models.*" />
+        <Bug pattern="DLS_DEAD_LOCAL_STORE" />
+        <Method name="execute" />
+    </Match>
+    <Match>
+        <Package name="~com\.teletracking\.controllers\.rest.*" />
+        <Bug pattern="DLS_DEAD_LOCAL_STORE" />
+        <Method name="execute" />
+    </Match>
+    <Match>
+        <Package name="~com\.teletracking\.controllers\.events.*" />
+        <Bug pattern="DLS_DEAD_LOCAL_STORE" />
+        <Method name="execute" />
+    </Match>
+    <Match>
+        <Package name="~com\.teletracking\.models.*" />
+        <Bug pattern="RC_REF_COMPARISON_BAD_PRACTICE_BOOLEAN" />
+        <Method name="equals" />
+    </Match>
+    <Match>
+        <Package name="~com\.teletracking\.models.*" />
+        <Bug pattern="NM_METHOD_NAMING_CONVENTION" />
+        <Method name="Process" />
+    </Match>
+    <Match>
+        <Package name="~com\.teletracking\.models.*" />
+        <Bug pattern="EI_EXPOSE_REP" />
+        <Method name="getMetaData" />
+    </Match>
+    <Match>
+        <Package name="~com\.teletracking\.models.*" />
+        <Bug pattern="RC_REF_COMPARISON" />
+        <Method name="equals" />
+    </Match>
+</FindBugsFilter>
