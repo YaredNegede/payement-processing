@@ -33,10 +33,10 @@ public class PaymentProcessingController {
     @PostMapping("/orders")
     public ResponseEntity<String> ingestPaymentOrder(@RequestBody PaymentOrder paymentOrder) {
         try {
-            String paymentId = paymentProcessing.ingestPayment(paymentOrder); // Assuming ingestPayment returns a payment ID
+            String paymentId = paymentProcessing.ingestPayment(paymentOrder);
             return new ResponseEntity<>("Payment order " + paymentId + " accepted for processing.", HttpStatus.ACCEPTED);
-        } catch (DuplicatePaymentException e) { // Custom exception for duplicate payments
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT); // 409 Conflict
+        } catch (DuplicatePaymentException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
         } catch (Exception e) {
             return new ResponseEntity<>("Failed to ingest payment order: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -51,7 +51,7 @@ public class PaymentProcessingController {
      */
     @GetMapping("/orders/{paymentId}/status")
     public ResponseEntity<PaymentStatusResponse> getPaymentStatus(@PathVariable String paymentId) {
-        PaymentStatusResponse status = paymentProcessing.getPaymentStatus(paymentId); // Assuming a PaymentStatusResponse DTO
+        PaymentStatusResponse status = paymentProcessing.getPaymentStatus(paymentId);
         if (status != null) {
             return new ResponseEntity<>(status, HttpStatus.OK);
         } else {

@@ -15,9 +15,15 @@ import java.util.List;
 @Service
 public class PaymentProcessingImpl implements PaymentProcessing {
 
-
+    /**
+     *
+     */
     private final PaymentProvider paymentProvider;
 
+    /**
+     *
+     * @param paymentProvider
+     */
     public PaymentProcessingImpl(PaymentProvider paymentProvider) {
         this.paymentProvider = paymentProvider;
     }
@@ -29,7 +35,7 @@ public class PaymentProcessingImpl implements PaymentProcessing {
 
     @Override
     public boolean updatePayment(String paymentId, PaymentOrder updatedPaymentOrder) {
-        return false;
+        return this.paymentProvider.getProvider().get(updatedPaymentOrder.getProvider()).updatePayment(updatedPaymentOrder);
     }
 
     @Override
@@ -44,7 +50,7 @@ public class PaymentProcessingImpl implements PaymentProcessing {
 
     @Override
     public String ingestPayment(PaymentOrder paymentOrder) throws DuplicatePaymentException {
-        return "";
+        return this.paymentProvider.getProvider().get(paymentOrder.getProvider()).ingestPayment(paymentOrder);
     }
 
     @Override
