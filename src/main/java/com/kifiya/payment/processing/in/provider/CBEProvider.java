@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
  *
  */
 @Slf4j
-@Component
+@Component("cbe")
 public class CBEProvider implements Provider {
 
     private final KafkaTemplate<String, String> kafkaTemplate;
