@@ -1,5 +1,6 @@
 package com.kifiya.payment.processing.in;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.kifiya.payment.processing.core.PaymentProcessing;
 import com.kifiya.payment.processing.in.dto.PaymentOrder;
 import com.kifiya.payment.processing.in.dto.PaymentStatusResponse;
@@ -9,8 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
-@RestController
-@RequestMapping("api/v1/processing")
+@RestController("api/v1/processing")
 public class PaymentProcessingController {
 
     private final PaymentProcessing paymentProcessing;
@@ -96,7 +96,7 @@ public class PaymentProcessingController {
      * @return A ResponseEntity indicating success or failure.
      */
     @PutMapping("/orders/{paymentId}")
-    public ResponseEntity<String> updatePaymentOrder(@PathVariable String paymentId, @RequestBody PaymentOrder updatedPaymentOrder) {
+    public ResponseEntity<String> updatePaymentOrder(@PathVariable String paymentId, @RequestBody PaymentOrder updatedPaymentOrder) throws JsonProcessingException {
         boolean success = paymentProcessing.updatePayment(paymentId, updatedPaymentOrder);
         if (success) {
             return new ResponseEntity<>("Payment order " + paymentId + " updated successfully.", HttpStatus.OK);

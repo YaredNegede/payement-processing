@@ -1,4 +1,4 @@
-package com.kifiya.payment.processing.out.provider;
+package com.kifiya.payment.processing.in.provider;
 
 import lombok.Getter;
 import org.springframework.stereotype.Component;
@@ -9,9 +9,9 @@ import java.util.Map;
 @Component
 public class PaymentProvider {
 
-    Map<String ,PaymentGateway> provider;
+    Map<String , Provider> provider;
 
-    public PaymentProvider(Map<String, PaymentGateway> provider) {
+    public PaymentProvider(Map<String, Provider> provider) {
         this.provider = provider;
     }
 

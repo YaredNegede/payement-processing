@@ -6,4 +6,8 @@ import lombok.Data;
 public class PaymentOrder {
 
     private String provider;
+
+    private String orderNumber;
+
+    private PaymentRequestDto paymentRequestDto;
 }

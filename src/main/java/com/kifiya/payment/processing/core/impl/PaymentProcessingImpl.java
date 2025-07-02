@@ -1,10 +1,11 @@
 package com.kifiya.payment.processing.core.impl;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.kifiya.payment.processing.core.PaymentProcessing;
 import com.kifiya.payment.processing.in.dto.PaymentStatusResponse;
 import com.kifiya.payment.processing.in.dto.PaymentOrder;
 import com.kifiya.payment.exceptions.DuplicatePaymentException;
-import com.kifiya.payment.processing.out.provider.PaymentProvider;
+import com.kifiya.payment.processing.in.provider.PaymentProvider;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -34,7 +35,7 @@ public class PaymentProcessingImpl implements PaymentProcessing {
     }
 
     @Override
-    public boolean updatePayment(String paymentId, PaymentOrder updatedPaymentOrder) {
+    public boolean updatePayment(String paymentId, PaymentOrder updatedPaymentOrder) throws JsonProcessingException {
         return this.paymentProvider.getProvider().get(updatedPaymentOrder.getProvider()).updatePayment(updatedPaymentOrder);
     }
 
@@ -49,7 +50,7 @@ public class PaymentProcessingImpl implements PaymentProcessing {
     }
 
     @Override
-    public String ingestPayment(PaymentOrder paymentOrder) throws DuplicatePaymentException {
+    public String ingestPayment(PaymentOrder paymentOrder) throws DuplicatePaymentException, JsonProcessingException {
         return this.paymentProvider.getProvider().get(paymentOrder.getProvider()).ingestPayment(paymentOrder);
     }
 
