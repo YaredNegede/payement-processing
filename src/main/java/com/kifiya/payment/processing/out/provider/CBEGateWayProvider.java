@@ -46,7 +46,7 @@ public class CBEGateWayProvider implements GateWayProvider {
         this.paymentRepository = paymentRepository;
     }
 
-    @KafkaListener(topics = CBEProvider.TOPIC_INGEST, groupId = "cbe-group")
+    @KafkaListener(topics = "cbe-ingest", groupId = "cbe-group")
     @Override
     public String ingestPayment(String paymentOrder) throws JsonProcessingException {
         PaymentOrder order = mapper.readValue(paymentOrder, PaymentOrder.class);
@@ -61,7 +61,7 @@ public class CBEGateWayProvider implements GateWayProvider {
         return response.getBody().getId();
     }
 
-    @KafkaListener(topics = CBEProvider.TOPIC_UPDATE, groupId = "cbe-group")
+    @KafkaListener(topics = "cbe-update", groupId = "cbe-group")
     @Override
     public boolean updatePayment(String updatedPaymentOrder) throws JsonProcessingException {
         PaymentOrder order = mapper.readValue(updatedPaymentOrder, PaymentOrder.class);
